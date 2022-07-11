@@ -4,6 +4,19 @@ import pandas as pd
 
 cities = pd.read_csv("canadacities.csv", nrows = 61)
 
+class answer:
+    def __init__(self):
+        self.city = select_city()
+        self.city_name = get_data(self.city, "city")
+        self.province = get_data(self.city, "province_name")
+        self.population = get_data(self.city, "population")
+        self.lat = get_data(self.city, "lat")
+        self.long = get_data(self.city, "lng")
+        return None
+    def test(self):
+        return self.city, self.city_name, self.province, self.population, self.lat, self.long
+
+
 #selects a row from the biggest canadian cities csv
 def select_city():
     city_num = random.randint(1, 61)
@@ -19,8 +32,5 @@ def get_data(citydata, typ):
     return data
 
 
-x = select_city()
-print(x)
-
-city_name = get_data(x, "city")
-print(city_name)
+ans = answer()
+print(ans.test())
