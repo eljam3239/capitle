@@ -33,4 +33,4 @@ def get_data(citydata, typ):
 
 
 ans = answer()
-print(ans.test())
+#print(ans.test())
