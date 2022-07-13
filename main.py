@@ -1,6 +1,7 @@
 from numpy import equal
 import answer
 import pandas as pd
+import numpy as np
 
 def is_valid_guess(guess):
     cities = pd.read_csv("canadacities.csv", nrows = 61)
@@ -36,12 +37,29 @@ def is_correct(guess, answer):
     else:
         return False
 
+def get_guess_data(city_name):
+    cities = pd.read_csv("canadacities.csv", nrows = 61)
+    city = city_name
+    return cities.loc[cities["city"] == city]
+
+def run():
+    test_answer = answer.answer().city_name
+    print(test_answer)
+    test_guess = guess()
+    
+
+
 if __name__ == "__main__":
+    """
     test_answer = answer.answer().city_name
     print(test_answer)
     test_guess = guess()
     print(test_guess)
     print(is_correct(test_guess, test_answer))
+    """
+
+    print(get_guess_data("Guelph"))
+    
 
 
     #test_guess = 
