@@ -3,6 +3,8 @@ import answer
 import pandas as pd
 import numpy as np
 
+
+
 def is_valid_guess(guess):
     cities = pd.read_csv("canadacities.csv", nrows = 61)
     valid_cities = cities["city"].values
@@ -14,7 +16,7 @@ def is_valid_guess(guess):
 
     
 
-def guess():
+def guess(answer):
     while True:
         try:
             user_guess = input("Please enter a guess: ")
@@ -24,11 +26,23 @@ def guess():
         if is_valid_guess(user_guess) == False:
             print("That is not one of the 60 most populous cities in Canada, try again: ")
             continue
+        elif is_correct(user_guess, answer) == False:
+            print("That is a valid guess, but it is incorect, please try again.\nHINT: ")
+            print(hint(user_guess, answer))
+            continue
         else:
-            #print("that is a permissable guess")
+            print("YOU WIN!!!!!!!!!!!!!!")
             #print(user_guess)
             break
     return user_guess
+
+
+def hint(user_guess, answer):
+    """Return a string that tells the user about province, lat, lng and population.    
+    user_guess: a string of a city name
+    answer: an answer object 
+    """
+    return None
 
 
 def is_correct(guess, answer):
@@ -45,7 +59,7 @@ def get_guess_data(city_name):
 def run():
     test_answer = answer.answer().city_name
     print(test_answer)
-    test_guess = guess()
+    test_guess = guess(test_answer)
     
 
 
@@ -57,8 +71,10 @@ if __name__ == "__main__":
     print(test_guess)
     print(is_correct(test_guess, test_answer))
     """
-
-    print(get_guess_data("Guelph"))
+    run()
+    #guess_data = get_guess_data("Guelph")
+    #print(guess_data['province_name'])
+    #SHOULD I MAKE AN OBJECT TO REPRESENT THE GUESSDATA, OR NAH
     
 
 
