@@ -42,16 +42,57 @@ def hint(user_guess, answer):
     user_guess: a string of a city name
     answer: an answer object 
     """
-    return None
+    popdiff = ['\u25b2', '\u25bc']
+    provdiff = ['\u2705', '\u274c']
+    latdiff = ['\u25b2', '\u25bc']
+    lngdiff = ['\u276f', '\u276e']
+    data = get_guess_data(user_guess)
+    guesspop = data['population']
+    guessprov = data["province_name"]
+    guesslat = data["lat"]
+    guesslng = data["lng"]
+    if guesspop == answer.population:
+        pop_diff = "Correct Population"
+    elif guesspop<answer.population:
+        pop_diff = popdiff[0]
+    else:
+        pop_diff = popdiff[1]
+
+    if guessprov == answer.province:
+        prov_diff = provdiff[0]
+    else:
+        prov_diff = provdiff[1]
+
+    if guesslat == answer.lat:
+        lat_diff = "Correct Latitude"
+    elif guesslat<answer.lat:
+        lat_diff = latdiff[0]
+    else: 
+        lat_diff = latdiff[1]
+    
+    if guesslng == answer.long:
+        lng_diff = "Correct Longitutde"
+    elif guesslng < answer.long:
+        lng_diff = lngdiff[0]
+    else: 
+        lng_diff = lngdiff[1]
+
+    print("HINTS: Province: "+prov_diff+" Population: "+ pop_diff+" Latitude: " + lat_diff + " Longitude: "+ lng_diff)
+    #print(popdiff, provdiff, latdiff, lngdiff)
+    #return None
 
 
 def is_correct(guess, answer):
+    """Compares the two"""
     if guess == answer:
         return True
     else:
         return False
 
 def get_guess_data(city_name):
+    """Gets a city's data from the dataset given a city name
+    city_name: a string
+    """
     cities = pd.read_csv("canadacities.csv", nrows = 61)
     city = city_name
     return cities.loc[cities["city"] == city]
